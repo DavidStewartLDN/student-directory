@@ -1,19 +1,22 @@
-# define variables at the beginning of the script
-student_count = 11
 # printing out the list of students we have at Villain Academy
+students = [
+  "Dr. Hannibal Lecter",
+  "Darth Vader",
+  "Nurse Ratched",
+  "Michael Corleone",
+  "Alex DeLarge",
+  "The Wicked Witch of the West",
+  "Terminator",
+  "Freddy Krueger",
+  "The Joker",
+  "Joffrey Baratheon",
+  "Norman Bates"
+]
+# and then print them with iteration
 puts "The students of Villains Academy"
 puts "-------------"
-puts "Dr. Hannibal Lecter"
-puts "Darth Vader"
-puts "Nurse Ratched"
-puts "Michael Corleone"
-puts "Alex DeLarge"
-puts "The Wicked Witch of the West"
-puts "Terminator"
-puts "Freddy Krueger"
-puts "The Joker"
-puts "Joffrey Baratheon"
-puts "Norman Bates"
-# print the number of students using variable!
-puts "Overall, we have #{student_count} great students"
-puts
+students.each do |name|
+  puts name
+end
+# prints the total number of students
+puts "Overall, we have #{students.length} great students"
