@@ -1,3 +1,5 @@
+# define variables at the beginning of the script
+student_count = 11
 # printing out the list of students we have at Villain Academy
 puts "The students of Villains Academy"
 puts "-------------"
@@ -12,9 +14,6 @@ puts "Freddy Krueger"
 puts "The Joker"
 puts "Joffrey Baratheon"
 puts "Norman Bates"
-# print the number of students using string rather than variable!
-print "Overall, we have "
-print 11
-# We want the last three lines together so use print statement
-puts " great students"
+# print the number of students using variable!
+puts "Overall, we have #{student_count} great students"
 puts
