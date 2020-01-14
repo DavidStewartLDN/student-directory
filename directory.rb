@@ -7,7 +7,7 @@ end
 def print(names)
   names.each_with_index() do |student, index|
     start_at_one = index + 1
-    if student[:name][0] == "T"
+    if student[:name].length() <= 12
       puts "#{start_at_one}. #{student[:name]} (#{student[:cohort]} cohort)"
     end
   end
