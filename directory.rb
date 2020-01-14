@@ -3,11 +3,14 @@ def print_header
   puts "The students of my Villains Academy as defined by you, me and Dupree"
   puts "-------------"
 end
+
 def print(names)
-  names.each do |student|
-    puts "#{student[:name]} (#{student[:cohort]} cohort)"
+  names.each_with_index() do |student, index|
+    start_at_one = index + 1
+    puts "#{start_at_one}. #{student[:name]} (#{student[:cohort]} cohort)"
   end
 end
+
 def print_footer(names)
   puts "Overall, we have #{names.length} great students"
 end
