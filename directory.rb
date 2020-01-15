@@ -8,7 +8,7 @@ def print(names)
   x = 1
   names.each_with_index() do |student, index|
     start_at_one = index + 1
-    puts "#{start_at_one}. #{student[:name]}, #{student[:cohort]} cohort, Favourite hobby: #{student[:hobby]}"
+    puts "#{start_at_one}. #{student[:name]}, #{student[:cohort]}, Favourite hobby #{student[:hobby]}"
     x += 1
   end
 end
@@ -42,12 +42,37 @@ def input_students
       end
     # adds the student hash to the array with predefined cohort
     students << {name: name, cohort: cohort, hobby: hobby}
-    puts "Now we have #{students.count} students".center(40)
+    if students.count == 1
+      puts "Now we have #{students.count} student".center(40)
+    else
+      puts "Now we have #{students.count} students".center(40)
+    end
   end
   students
+end
+
+def sort(hash)
+  puts "Would you like to sort by cohort (yes/no)"
+  input = gets.chomp
+  if input == "yes"
+    sorted = {}
+    hash.each do |term|
+      name = term[:name]
+      cohort = term[:cohort]
+      hobby = term[:hobby]
+      if sorted[cohort] == nil
+        sorted[cohort] = []
+      end
+    sorted[cohort].push(name)
+    end
+    sorted.each do |key, value|
+      puts "#{key} cohort contains: #{value.join(', ')}"
+    end
+  end
 end
 
 students = input_students
 print_header
 print(students)
 print_footer(students)
+sort(students)
