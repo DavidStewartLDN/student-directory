@@ -1,7 +1,8 @@
 # prints header for Villains Academy
 def print_header(names)
+  # If list has no names, method returns nothing
   if names.length > 0
-    puts "The students of my Villains Academy as defined by you, me and Dupree"
+    puts "\nThe students of our Villain's Academy as defined by you, me and Dupree"
     puts "-------------"
   else
     puts "No students in this years cohort, sorry and goodbye"
@@ -22,8 +23,9 @@ end
 
 
 def print_footer(names)
+  # If list has no names, method returns nothing
   if names.length > 0
-    puts "Overall, we have #{names.length} great students"
+    puts "Overall, we have #{names.length} great students \n\n"
   end
 end
 
@@ -61,6 +63,8 @@ def input_students
   students
 end
 
+# Currently unused after adding interactive interactive
+# Sorts hashes into cohorts
 def sort(hash)
   if hash.length > 0
     puts "Would you like to sort by cohort (yes/no)"
@@ -83,8 +87,29 @@ def sort(hash)
   end
 end
 
-students = input_students
-print_header(students)
-print(students)
-print_footer(students)
-sort(students)
+def interactive_menu
+  students = []
+  loop do
+    # 1. print the menu and ask the user what to do
+    puts "1. Input the students"
+    puts "2. Show student list"
+    puts "9. Exit"
+    # 2. read the input and save it into a variable
+    selection = gets.chomp
+    # 3. do what the user has asked
+    case selection
+    when "1"
+      students = input_students
+    when "2"
+      print_header(students)
+      print(students)
+      print_footer(students)
+    when "9"
+      exit # this will cause the program to terminate
+    else
+      puts "You ain't talkin my language, say that again?"
+    end
+  end
+end
+
+interactive_menu
