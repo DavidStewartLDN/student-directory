@@ -5,11 +5,11 @@ def print_header
 end
 
 def print(names)
+  x = 1
   names.each_with_index() do |student, index|
     start_at_one = index + 1
-    if student[:name].length() <= 12
-      puts "#{start_at_one}. #{student[:name]} (#{student[:cohort]} cohort)"
-    end
+    puts "#{start_at_one}. #{student[:name]}, #{student[:cohort]} cohort, Favourite hobby: #{student[:hobby]}"
+    x += 1
   end
 end
 
@@ -18,21 +18,32 @@ def print_footer(names)
 end
 
 def input_students
-  puts "Please enter the names of the Students"
-  puts "To finish, just hit that return key twice"
   # empty students array
   students = []
-  # get the students names
-  name = gets.chomp
-  # while loop for when name is not empty, repeat this code
-  while !name.empty? do
+  while true
+    puts "Please enter the names of the Students"
+    puts "To finish, type exit".center(40)
+    # get the students names
+    name = gets.chomp.capitalize
+      if name == "Exit"
+        break
+      end
+    # Requesting cohort from user
+    puts "Please enter a cohort for this student"
+    cohort = gets.chomp.capitalize
+      if cohort == ""
+        cohort = "November"
+      end
+    # Requesting favourite hobby
+    puts "Please enter the students favourite hobby if known"
+    hobby = gets.chomp.capitalize
+      if hobby == ""
+        hobby = "Coding"
+      end
     # adds the student hash to the array with predefined cohort
-    students << {name: name, cohort: :november}
-    puts "Now we have #{students.count} students"
-    # get another name from the user
-    name = gets.chomp
+    students << {name: name, cohort: cohort, hobby: hobby}
+    puts "Now we have #{students.count} students".center(40)
   end
-  # return the array of students
   students
 end
 
