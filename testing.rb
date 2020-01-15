@@ -13,8 +13,14 @@ def print(names)
   end
 end
 
+# footer defining how many students there are in the user defined cohort
 def print_footer(names)
-  puts "Overall, we have #{names.length} great students"
+  # checks if there is one student and puts only a single statement if there is
+  if names.length == 1
+    puts "Overall, we have #{names.length} great student"
+  else
+    puts "Overall, we have #{names.length} great students"
+  end
 end
 
 def input_students

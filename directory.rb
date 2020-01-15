@@ -1,17 +1,19 @@
-# and then print them with iteration
+# prints header for Villains Academy
 def print_header
   puts "The students of my Villains Academy as defined by you, me and Dupree"
   puts "-------------"
 end
 
+# prints names in defined pattern for each key value array.
 def print(names)
-  x = 1
+  # each with index adds index before each puts statement
   names.each_with_index() do |student, index|
+    # offset puts by one
     start_at_one = index + 1
     puts "#{start_at_one}. #{student[:name]}, #{student[:cohort]}, Favourite hobby #{student[:hobby]}"
-    x += 1
   end
 end
+
 
 def print_footer(names)
   puts "Overall, we have #{names.length} great students"
@@ -19,7 +21,7 @@ end
 
 def input_students
   # empty students array
-  students = []
+  students = {}
   while true
     puts "Please enter the names of the Students"
     puts "To finish, type exit".center(40)
