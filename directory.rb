@@ -24,7 +24,7 @@ def input_students
     puts "Please enter the names of the Students"
     puts "To finish, type exit".center(40)
     # get the students names
-    name = gets.chomp.capitalize
+    name = gets.strip.capitalize
       if name == "Exit"
         break
       end
