@@ -110,8 +110,9 @@ def print_menu
 end
 
 def save_students
+  filename = what_filename
   # open the file for writing
-  file = File.open("students.csv", "w")
+  file = File.open(filename, "w")
   # iterate over the array of students
   @students.each do |student|
     student_data = [student[:name], student[:cohort], student[:hobby]]
@@ -119,6 +120,13 @@ def save_students
     file.puts csv_line
   end
   file.close
+end
+
+def what_filename
+  puts "Which file would you like to save to"
+  filename = gets.chomp
+  if filename == "" then filename = "students.csv" end
+  return filename
 end
 
 def load_students(filename = "students.csv")
@@ -137,7 +145,7 @@ def try_load_students
   end
   if File.exists?(filename) # if it exists
     load_students(filename)
-     puts "Loaded #{@students.count} from #{filename}"
+    puts "Loaded #{@students.count} from #{filename}"
   else # if it doesn't exist
     puts "Sorry, #{filename} doesn't exist."
     exit # quit the program
@@ -161,7 +169,7 @@ def process(selection)
       save_students
       puts "\nStudents have successfully been saved Jimmy boy!\n\n"
     when "4"
-      load_students
+      load_students(what_filename)
       puts "\nStudents have successfully been loaded MacTavish!\n\n"
     when "5"
       puts @students
