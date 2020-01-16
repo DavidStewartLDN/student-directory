@@ -1,7 +1,9 @@
+# Declare global variable
+@students = []
 # prints header for Villains Academy
-def print_header(names)
+def print_header
   # If list has no names, method returns nothing
-  if names.length > 0
+  if @students.length > 0
     puts "\nThe students of our Villain's Academy as defined by you, me and Dupree"
     puts "-------------"
   else
@@ -10,10 +12,10 @@ def print_header(names)
 end
 
 # prints names in defined pattern for each key value array.
-def print(names)
-  if names.length > 0
+def print_student_list
+  if @students.length > 0
     # each with index adds index before each puts statement
-    names.each_with_index() do |student, index|
+    @students.each_with_index() do |student, index|
       # offset puts by one
       start_at_one = index + 1
       puts "#{start_at_one}. #{student[:name]}, #{student[:cohort]}, Favourite hobby #{student[:hobby]}"
@@ -22,16 +24,14 @@ def print(names)
 end
 
 
-def print_footer(names)
+def print_footer
   # If list has no names, method returns nothing
-  if names.length > 0
-    puts "Overall, we have #{names.length} great students \n\n"
+  if @students.length > 0
+    puts "Overall, we have #{@students.length} great students \n\n"
   end
 end
 
 def input_students
-  # empty students array
-  students = []
   while true
     puts "Please enter the names of the Students"
     puts "To finish, type exit".center(40)
@@ -53,25 +53,25 @@ def input_students
         hobby = "Coding"
       end
     # adds the student hash to the array with predefined cohort
-    students << {name: name, cohort: cohort, hobby: hobby}
-    if students.count == 1
-      puts "Now we have #{students.count} student".center(40)
+    @students << {name: name, cohort: cohort, hobby: hobby}
+    if @students.count == 1
+      puts "Now we have #{@students.count} student".center(40)
     else
-      puts "Now we have #{students.count} students".center(40)
+      puts "Now we have #{@students.count} students".center(40)
     end
   end
-  students
+  @students
 end
 
 # Currently unused after adding interactive interactive
 # Sorts hashes into cohorts
-def sort(hash)
-  if hash.length > 0
+def sort
+  if @students.length > 0
     puts "Would you like to sort by cohort (yes/no)"
     input = gets.chomp
     if input == "yes"
       sorted = {}
-      hash.each do |term|
+      @students.each do |term|
         name = term[:name]
         cohort = term[:cohort]
         hobby = term[:hobby]
@@ -88,27 +88,37 @@ def sort(hash)
 end
 
 def interactive_menu
-  students = []
   loop do
     # 1. print the menu and ask the user what to do
-    puts "1. Input the students"
-    puts "2. Show student list"
-    puts "9. Exit"
+    print_menu
     # 2. read the input and save it into a variable
-    selection = gets.chomp
+    process(gets.chomp)
     # 3. do what the user has asked
-    case selection
+  end
+end
+
+def print_menu
+  puts "1. Input the students"
+  puts "2. Show the students"
+  puts "9. Exit" # 9 because we'll be adding more items
+end
+
+def show_students
+  print_header
+  print_student_list
+  print_footer
+end
+
+def process(selection)
+  case selection
     when "1"
-      students = input_students
+      input_students
     when "2"
-      print_header(students)
-      print(students)
-      print_footer(students)
+      show_students
     when "9"
-      exit # this will cause the program to terminate
+      exit
     else
-      puts "You ain't talkin my language, say that again?"
-    end
+      puts "I don't know what you mean, try again"
   end
 end
 
