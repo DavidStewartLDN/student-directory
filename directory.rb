@@ -154,12 +154,15 @@ def process(selection)
   case selection
     when "1"
       input_students
+      puts "\nThank you for adding students to the cohort!\n\n"
     when "2"
       show_students
     when "3"
       save_students
+      puts "\nStudents have successfully been saved Jimmy boy!\n\n"
     when "4"
       load_students
+      puts "\nStudents have successfully been loaded MacTavish!\n\n"
     when "5"
       puts @students
     when "9"
