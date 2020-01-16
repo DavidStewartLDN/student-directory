@@ -36,24 +36,24 @@ def input_students
     puts "Please enter the names of the Students"
     puts "To finish, type exit".center(40)
     # get the students names
-    name = gets.strip.capitalize
+    name = STDIN.gets.strip.capitalize
       if name == "Exit"
         break
       end
     # Requesting cohort from user
     puts "Please enter a cohort for this student"
-    cohort = gets.chomp.capitalize
+    cohort = STDIN.gets.chomp.capitalize
       if cohort == ""
         cohort = "November"
       end
     # Requesting favourite hobby
     puts "Please enter the students favourite hobby if known"
-    hobby = gets.chomp.capitalize
+    hobby = STDIN.gets.chomp.capitalize
       if hobby == ""
         hobby = "Coding"
       end
     # adds the student hash to the array with predefined cohort
-    @students << {name: name, cohort: cohort, hobby: hobby}
+    add_student(name, cohort, hobby)
     if @students.count == 1
       puts "Now we have #{@students.count} student".center(40)
     else
@@ -61,6 +61,10 @@ def input_students
     end
   end
   @students
+end
+
+def add_student(name, cohort, hobby)
+  @students << {name: name, cohort: cohort, hobby: hobby}
 end
 
 # Currently unused after adding interactive interactive
@@ -92,7 +96,7 @@ def interactive_menu
     # 1. print the menu and ask the user what to do
     print_menu
     # 2. read the input and save it into a variable
-    process(gets.chomp)
+    process(STDIN.gets.chomp)
     # 3. do what the user has asked
   end
 end
@@ -117,13 +121,25 @@ def save_students
   file.close
 end
 
-def load_students
-  file = File.open("students.csv", "r")
+def load_students(filename = "students.csv")
+  file = File.open(filename, "r")
   file.readlines.each do |line|
   name, cohort, hobby= line.chomp.split(',')
-    @students << {name: name, cohort: cohort.to_sym, hobby: hobby}
+    add_student(name, cohort, hobby)
   end
   file.close
+end
+
+def try_load_students
+  filename = ARGV.first # first argument from the command line
+  return if filename.nil? # get out of the method if it isn't given
+  if File.exists?(filename) # if it exists
+    load_students(filename)
+     puts "Loaded #{@students.count} from #{filename}"
+  else # if it doesn't exist
+    puts "Sorry, #{filename} doesn't exist."
+    exit # quit the program
+  end
 end
 
 def show_students
@@ -151,4 +167,5 @@ def process(selection)
   end
 end
 
+try_load_students
 interactive_menu
